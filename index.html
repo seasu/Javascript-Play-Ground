@@ -1,0 +1,38 @@
+<html>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&v=3&libraries=geometry"></script>
+<script>
+function calculateDistance() {
+  const lat1 = parseFloat(document.getElementById('lat1').value);
+  const lng1 = parseFloat(document.getElementById('lng1').value);
+  const lat2 = parseFloat(document.getElementById('lat2').value);
+  const lng2 = parseFloat(document.getElementById('lng2').value);
+
+  const latLngA = new google.maps.LatLng(lat1, lng1);
+  const latLngB = new google.maps.LatLng(lat2, lng2);
+  
+  var distance = google.maps.geometry.spherical.computeDistanceBetween(latLngA, latLngB);
+  document.getElementById('result').innerHTML = `距離: ${distance.toFixed(2)} 公尺`;
+}
+
+// set point A as 台北-中山捷運站
+window.onload = function() {
+  document.getElementById('lat1').value = 25.053038005369995;
+  document.getElementById('lng1').value = 121.52042415442115;
+}
+</script>
+<body>
+  <h1>Use google map geometry library to calculate distance between two points</h1>
+  <div>
+    <label>Point A:</label>
+    <input type="number" id="lat1" placeholder="Latitude" step="any">
+    <input type="number" id="lng1" placeholder="Longitude" step="any">
+  </div>
+  <div>
+    <label>Point B:</label>
+    <input type="number" id="lat2" placeholder="Latitude" step="any">
+    <input type="number" id="lng2" placeholder="Longitude" step="any">
+  </div>
+  <button onclick="calculateDistance()">Calculate Distance</button>
+  <div id="result"></div>
+</body>
+</html>
